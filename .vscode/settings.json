@@ -1,0 +1,9 @@
+{
+  "editor.tabCompletion": "on",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#0A3519",
+    "titleBar.activeBackground": "#0E4A23",
+    "titleBar.activeForeground": "#F2FCF5"
+  },
+  "diffEditor.codeLens": true
+}
