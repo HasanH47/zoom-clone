@@ -7,13 +7,11 @@ class JitsiMeetMethods {
   final AuthMethods _authMethods = AuthMethods();
   final FirestoreMethods _firestoreMethods = FirestoreMethods();
 
-  late TextEditingController serverText = TextEditingController();
   late TextEditingController subjectText = TextEditingController();
   late TextEditingController tokenText = TextEditingController();
-  late TextEditingController userDisplayNameText = TextEditingController();
-  late TextEditingController userEmailText = TextEditingController();
   
   void createMeeting({
+    required String serverText,
     required String roomName,
     required bool isAudioMuted,
     required bool isVideoMuted,
@@ -22,7 +20,7 @@ class JitsiMeetMethods {
   }) async {
     try {
       String? serverUrl =
-          serverText.text.trim().isEmpty ? null : serverText.text;
+          serverText.trim().isEmpty ? null : serverText;
       Map<String, Object> featureFlags = {};
       String name;
       if (username.isEmpty) {
