@@ -13,8 +13,7 @@ class VideoCallScreen extends StatefulWidget {
 
 class _VideoCallScreenState extends State<VideoCallScreen> {
   final AuthMethods _authMethods = AuthMethods();
-  late bool _isUsingLink = false;
-  late TextEditingController serverTextController = TextEditingController();
+  // late TextEditingController serverTextController = TextEditingController();
   late TextEditingController meetingIdController;
   late TextEditingController nameController;
   final JitsiMeetMethods _jitsiMeetMethods = JitsiMeetMethods();
@@ -24,7 +23,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
 
   @override
   void initState() {
-    serverTextController = TextEditingController();
+    // serverTextController = TextEditingController();
     meetingIdController = TextEditingController();
     nameController = TextEditingController(
       text: _authMethods.user.displayName,
@@ -35,21 +34,18 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
   @override
   void dispose() {
     super.dispose();
-    serverTextController.dispose();
+    // serverTextController.dispose();
     meetingIdController.dispose();
     nameController.dispose();
   }
 
   _joinMeeting() {
-    if (!_isUsingLink || serverTextController.text.trim().isEmpty) {
-      meetingIdController.text = 'defaultMeetingId';
-    }
-    if (meetingIdController.text.trim().isEmpty) {
-      print("Meeting ID is empty");
-      return;
-    }
+    // if (meetingIdController.text.trim().isEmpty) {
+    //   print("Meeting ID is empty");
+    //   return;
+    // }
     _jitsiMeetMethods.createMeeting(
-      serverText: serverTextController.text,
+      // serverText: serverTextController.text,
       roomName: meetingIdController.text,
       isAudioMuted: isAudioMuted,
       isAudioOnly: isAudioOnly,
@@ -73,43 +69,37 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
         centerTitle: true,
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          // SizedBox(
+          //   height: 60,
+          //   child: TextField(
+          //     controller: serverTextController,
+          //     maxLines: 1,
+          //     textAlign: TextAlign.center,
+          //     keyboardType: TextInputType.text,
+          //     decoration: const InputDecoration(
+          //       fillColor: secondaryBackgroundColor,
+          //       filled: true,
+          //       border: InputBorder.none,
+          //       hintText: 'Hint: Leave empty for meet.jitsi.si',
+          //       contentPadding: EdgeInsets.fromLTRB(16, 8, 0, 0),
+          //     ),
+          //   ),
+          // ),
           SizedBox(
             height: 60,
             child: TextField(
-              controller:
-                  _isUsingLink ? meetingIdController : serverTextController,
+              controller: meetingIdController,
               maxLines: 1,
               textAlign: TextAlign.center,
-              keyboardType: _isUsingLink ? TextInputType.number : TextInputType.text,
-              decoration: InputDecoration(
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
                 fillColor: secondaryBackgroundColor,
                 filled: true,
                 border: InputBorder.none,
-                hintText: _isUsingLink
-                    ? 'Room ID'
-                    : 'Hint: Leave empty for meet.jitsi.si',
-                contentPadding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
+                hintText: 'Room ID',
+                contentPadding: EdgeInsets.fromLTRB(16, 8, 0, 0),
               ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              setState(() {
-                _isUsingLink = !_isUsingLink;
-                if (_isUsingLink) {
-                  meetingIdController.text = '';
-                } else {
-                  serverTextController.text = '';
-                }
-              });
-            },
-            child: Text(
-              _isUsingLink
-                  ? 'Don\'t have a room ID? Use link'
-                  : 'Don\'t have a link? Use room ID',
             ),
           ),
           SizedBox(

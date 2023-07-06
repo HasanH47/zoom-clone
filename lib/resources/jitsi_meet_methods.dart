@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
 import 'package:zoom_clone/resources/auth_methods.dart';
 import 'package:zoom_clone/resources/firestore_methods.dart';
@@ -7,11 +7,11 @@ class JitsiMeetMethods {
   final AuthMethods _authMethods = AuthMethods();
   final FirestoreMethods _firestoreMethods = FirestoreMethods();
 
-  late TextEditingController subjectText = TextEditingController();
-  late TextEditingController tokenText = TextEditingController();
+  // late TextEditingController subjectText = TextEditingController();
+  // late TextEditingController tokenText = TextEditingController();
   
   void createMeeting({
-    required String serverText,
+    // required String serverText,
     required String roomName,
     required bool isAudioMuted,
     required bool isVideoMuted,
@@ -19,8 +19,8 @@ class JitsiMeetMethods {
     String username = '',
   }) async {
     try {
-      String? serverUrl =
-          serverText.trim().isEmpty ? null : serverText;
+      // String? serverUrl =
+      //     serverText.trim().isEmpty ? null : serverText;
       Map<String, Object> featureFlags = {};
       String name;
       if (username.isEmpty) {
@@ -31,9 +31,9 @@ class JitsiMeetMethods {
       // Define meetings options here
       var options = JitsiMeetingOptions(
       roomNameOrUrl: roomName,
-      serverUrl: serverUrl,
-      subject: subjectText.text,
-      token: tokenText.text,
+      // serverUrl: serverUrl,
+      // subject: subjectText.text,
+      // token: tokenText.text,
       isAudioMuted: isAudioMuted,
       isAudioOnly: isAudioOnly,
       isVideoMuted: isVideoMuted,
